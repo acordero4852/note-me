@@ -1,4 +1,4 @@
-import { Flex, Box, Card, CardHeader, CardBody, CardFooter, Heading, FormControl, FormLabel, Input, Button, Text } from '@chakra-ui/react'
+import { Flex, Center, Card, CardHeader, CardBody, CardFooter, Heading, FormControl, FormLabel, Input, Button, Text } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import React, { useState } from 'react'
 
@@ -11,10 +11,10 @@ const Login = () => {
   }
 
   return (
-    <Flex>
+    <Flex justify="center" align="center" height="100vh" bg="#008CC9" color="#000e14">
       <Card p={10}>
         <CardHeader>
-          <Heading>Login</Heading>
+          <Heading textAlign="center">Login</Heading>
         </CardHeader>
         <CardBody>
           <form>
@@ -26,13 +26,15 @@ const Login = () => {
               <FormLabel>Password</FormLabel>
               <Input type="password" name="password" value={user.password} placeholder="Enter your password" onChange={handleChange}/>
             </FormControl>
-            <Button colorScheme="teal" mt={4} type="submit">
-              Sign In
-            </Button>
+            <Center mt={6}>
+              <Button colorScheme="linkedin" type="submit">
+                Sign In
+              </Button>
+            </Center>
           </form>
         </CardBody>
         <CardFooter>
-          <Text>Don't have an account? Register <Link to='/register' style={{color: 'teal'}}>here</Link></Text>
+          <Text textAlign="center">Don't have an account? Register <Link to='/register' style={{color: '#008CC9'}}>here</Link></Text>
         </CardFooter>
       </Card>
     </Flex>
