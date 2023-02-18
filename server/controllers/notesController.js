@@ -1,31 +1,30 @@
 const Notes = require("../models/notesModel");
+const ErrorHandler = require("../utils/errorHandler");
+const catchAsyncError = require("../middleware/catchAsyncError");
 
-exports.createNotes = async (req, res, next) => {
+exports.createNotes = catchAsyncError(async (req, res, next) => {
   const note = await Notes.create(req.body);
 
   res.status(201).json({
     success: true,
     note,
   });
-};
+});
 
-exports.getAllNotes = async (req, res) => {
+exports.getAllNotes = catchAsyncError(async (req, res) => {
   const notes = await Notes.find();
 
   res.status(200).json({
     success: true,
     notes,
   });
-};
+});
 
-exports.deleteNote = async (req, res, next) => {
+exports.deleteNote = catchAsyncError(async (req, res, next) => {
   const note = await Notes.findById(req.params.id);
 
   if (!note) {
-    return res.status(500).json({
-      success: false,
-      message: "Resource not found!",
-    });
+    return next(new ErrorHandler("Resource not found!", 404));
   }
 
   await note.remove();
@@ -34,32 +33,26 @@ exports.deleteNote = async (req, res, next) => {
     success: true,
     message: "Notes deleted successfully!",
   });
-};
+});
 
-exports.getSingleNote = async (req, res, next) => {
+exports.getSingleNote = catchAsyncError(async (req, res, next) => {
   const note = await Notes.findById(req.params.id);
 
   if (!note) {
-    return res.status(500).json({
-      success: false,
-      message: "Resource not found!",
-    });
+    return next(new ErrorHandler("Resource not found!", 404));
   }
 
   res.status(200).json({
     success: true,
     note,
   });
-};
+});
 
-exports.updateNote = async (req, res, next) => {
+exports.updateNote = catchAsyncError(async (req, res, next) => {
   let note = await Notes.findById(req.params.id);
 
   if (!note) {
-    return res.status(500).json({
-      success: false,
-      message: "Resource not found!",
-    });
+    return next(new ErrorHandler("Resource not found!", 404));
   }
 
   note = await Notes.findByIdAndUpdate(req.params.id, req.body, {
@@ -72,4 +65,4 @@ exports.updateNote = async (req, res, next) => {
     success: true,
     note,
   });
-};
+});
