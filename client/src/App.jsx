@@ -1,6 +1,9 @@
 import { Heading } from '@chakra-ui/react'
 import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import Landing from './pages/Landing'
+import Login from './pages/Login'
+import Register from './pages/Register'
 
 const App = () => {
   const [count, setCount] = useState(0)
@@ -8,7 +11,9 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Heading>Hello World</Heading>} />
+        <Route exact path="/" element={<Landing />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </>
   )
