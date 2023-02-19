@@ -1,8 +1,9 @@
 import { Box, Heading, Stack, Tag, HStack, IconButton, Flex, Text } from '@chakra-ui/react'
-import { BsSave, BsPencil } from 'react-icons/bs'
+import { BsSave, BsPencil, BsFileEarmarkPdf } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import Sidebar from '../components/Sidebar'
 import parse from 'html-react-parser'
+import html2pdf from 'html2pdf.js'
 import React, { useState } from 'react'
 
 const NoteView = () => {
@@ -13,6 +14,18 @@ const NoteView = () => {
 
   const navigate = useNavigate();
 
+  const handleDownloadPdf = () => {
+    const options = {
+      margin: 1,
+      filename: `${title}.pdf`,
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+      pdfHighlight: true,
+    };
+    html2pdf().from(textContent).set(options).save();
+  };
+
   return (
     <Box>
       <Sidebar />
@@ -21,6 +34,7 @@ const NoteView = () => {
           <Heading as="h1" fontSize={32}>Preview</Heading>
           <HStack spacing={2}>
             <IconButton icon={<BsSave />} aria-label='Save note' colorScheme='teal' onClick={() => navigate('/dashboard')}/>
+            <IconButton icon={<BsFileEarmarkPdf />} aria-label='Download as PDF' colorScheme='yellow' onClick={handleDownloadPdf}/>
             <IconButton icon={<BsPencil />} aria-label="Edit note" colorScheme='linkedin' onClick={() => navigate('/edit')}/>
           </HStack>
         </Flex>
