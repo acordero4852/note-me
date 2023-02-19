@@ -3,7 +3,7 @@ import { BsPencil, BsTrash, BsEye } from "react-icons/bs"
 import React, {useState} from 'react'
 
 const NoteCard = () => {
-  const tags = ['Reading', 'Writing', 'Math', 'Science']
+  const tags = ['Tags', 'Writing', 'Math', 'Science']
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -12,7 +12,7 @@ const NoteCard = () => {
       <Card width={400} p={6}>
         <Stack spacing={4}>
           <Flex justify="space-between" align="center">  
-            <Heading fontSize={24} noOfLines={1}>Hello</Heading>
+            <Heading fontSize={24} noOfLines={1}>Title</Heading>
             <HStack spacing={2}>
               <IconButton icon={<BsPencil />} size='xs' aria-label='Edit note' colorScheme='teal'/>
               <IconButton icon={<BsEye />} size='xs' aria-label="View note" colorScheme='linkedin'/>
@@ -21,11 +21,11 @@ const NoteCard = () => {
           </Flex>
           <HStack spacing={2} noOfLines={1}>
             {tags.map((tag, index) => (
-              <Tag key={index} colorScheme='cyan' variant='subtle'>{tag}</Tag>
-              ))}
+              <Tag key={index} colorScheme='cyan' variant='subtle' borderRadius="full">{tag}</Tag>
+            ))}
           </HStack>
           <Text noOfLines={5}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</Text>
-          <Text fontSize={16} textAlign="end">June 10 2021</Text>
+          <Text fontSize={16} textAlign="end">Date</Text>
         </Stack>
       </Card>
       <Modal isOpen={isOpen} onClose={onClose}>

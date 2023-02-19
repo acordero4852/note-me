@@ -1,7 +1,11 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Avatar, Box, Center, Image, Flex, Heading, Button } from '@chakra-ui/react'
 
 const Sidebar = () => {
+
+  const navigate = useNavigate()
+
   return (
     <Box width={300} height="100%" bg="#008CC9" p={4} pos="fixed">
       <Center>
@@ -12,7 +16,7 @@ const Sidebar = () => {
         <Heading fontSize={18} color="white">John Doe</Heading>
       </Flex>
       <Center mt={4}>
-        <Button size="sm">Log Out</Button>
+        <Button size="sm" onClick={() => navigate('/')}>Log Out</Button>
       </Center>
     </Box>
   )
