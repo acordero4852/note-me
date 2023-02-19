@@ -1,12 +1,20 @@
 import { Flex, Center, Card, CardHeader, CardBody, CardFooter, Heading, FormControl, FormLabel, Input, Button, Text } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import React, { useState } from 'react'
 
 const Register = () => {
   const [user, setUser] = useState({ username: '', email: '', password: '', confirmPassword: ''});
 
+  const navigate = useNavigate();
+  
   const handleChange = (e) => {
     setUser({...user, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    navigate('/dashboard')
   }
 
   return (
@@ -16,7 +24,7 @@ const Register = () => {
           <Heading textAlign="center">Register</Heading>
         </CardHeader>
         <CardBody>
-          <form>
+          <form onSubmit={handleSubmit}>
             <FormControl>
               <FormLabel>Username</FormLabel>
               <Input type="text" name="username" value={user.username} placeholder="johndoe1234" onChange={handleChange} />
