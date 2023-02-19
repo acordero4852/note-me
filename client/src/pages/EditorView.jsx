@@ -42,7 +42,7 @@ const EditorView = () => {
       <Box p={16} ml={300}>
         <Flex justify="space-between" align="center">
           <HStack spacing={2}>
-            <IconButton icon={<BsArrowLeft />} aria-label='Back' onClick={navigate('/dashboard')}/>
+            <IconButton icon={<BsArrowLeft />} aria-label='Back' onClick={() => navigate('/dashboard')}/>
             <Heading as="h1" fontSize={32}>Note Editor</Heading>
           </HStack>
           <HStack spacing={2}>
@@ -88,7 +88,6 @@ const EditorView = () => {
             />
           </Box>
         </Stack>
-        <Text>{textContent}</Text>
       </Box>
     </Box>
   )
